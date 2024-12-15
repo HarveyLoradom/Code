@@ -53,5 +53,7 @@ private slots:
 
     void on_btnAddMinus_clicked();
     void on_Science_triggered();
+    void on_Programmer_triggered();
+    void on_Date_triggered();
 };
 #endif // MAINWINDOW_H

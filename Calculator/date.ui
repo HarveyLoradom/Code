@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Date</class>
+ <widget class="QMainWindow" name="Date">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>389</width>
+    <height>381</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QComboBox" name="ComboxChoice">
+        <item>
+         <property name="text">
+          <string>日期之间的相隔时间</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>添加或减去天数</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>开始日期</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="StartDate"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>结束日期</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="EndDate"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>差值</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="DisplayDate1">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>60</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>开始日期</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="StartedDate"/>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QRadioButton" name="radioAdd">
+                <property name="text">
+                 <string>添加</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioMinus">
+                <property name="text">
+                 <string>减去</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="2" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <widget class="QLabel" name="label_5">
+                  <property name="text">
+                   <string>年</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="spinYear"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <item>
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>月</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="spinMonth"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_8">
+                <item>
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>日</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="spinDay"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>日期</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="DisplayDate2">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>60</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>389</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <property name="icon">
+     <iconset resource="rsc.qrc">
+      <normaloff>:/img/Menu.svg</normaloff>:/img/Menu.svg</iconset>
+    </property>
+    <addaction name="Standard"/>
+    <addaction name="Science"/>
+    <addaction name="Programmer"/>
+    <addaction name="DateCal"/>
+    <addaction name="separator"/>
+    <addaction name="Currency"/>
+    <addaction name="Capacity"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="Standard">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Standard.svg</normaloff>:/img/Standard.svg</iconset>
+   </property>
+   <property name="text">
+    <string>标准</string>
+   </property>
+   <property name="toolTip">
+    <string>标准</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Science">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Science.svg</normaloff>:/img/Science.svg</iconset>
+   </property>
+   <property name="text">
+    <string>科学</string>
+   </property>
+   <property name="toolTip">
+    <string>科学</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Programmer">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Programmer.svg</normaloff>:/img/Programmer.svg</iconset>
+   </property>
+   <property name="text">
+    <string>程序员</string>
+   </property>
+   <property name="toolTip">
+    <string>程序员</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="DateCal">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Date.svg</normaloff>:/img/Date.svg</iconset>
+   </property>
+   <property name="text">
+    <string>日期计算</string>
+   </property>
+   <property name="toolTip">
+    <string>日期计算</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Currency">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Currency.svg</normaloff>:/img/Currency.svg</iconset>
+   </property>
+   <property name="text">
+    <string>货币</string>
+   </property>
+   <property name="toolTip">
+    <string>货币</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Capacity">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Capacity.svg</normaloff>:/img/Capacity.svg</iconset>
+   </property>
+   <property name="text">
+    <string>容量</string>
+   </property>
+   <property name="toolTip">
+    <string>容量</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="rsc.qrc"/>
+ </resources>
+ <connections/>
+</ui>

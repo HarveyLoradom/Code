@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include"subject.h"
+#include"programmer.h"
+#include"date.h"w
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -263,6 +265,22 @@ void MainWindow::on_Science_triggered()
 {
     Subject *subject=new Subject();
     subject->show();
+    this->hide();
+}
+
+
+void MainWindow::on_Programmer_triggered()
+{
+    Programmer *programmer=new Programmer();
+    programmer->show();
+    this->hide();
+}
+
+
+void MainWindow::on_Date_triggered()
+{
+    Date *date=new Date();
+    date->show();
     this->hide();
 }
 
