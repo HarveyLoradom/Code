@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/Capacity.svg</file>
+        <file>img/Currency.svg</file>
+        <file>img/Date.svg</file>
+        <file>img/Menu.svg</file>
+        <file>img/Programmer.svg</file>
+        <file>img/Science.svg</file>
+        <file>img/Standard.svg</file>
+    </qresource>
+</RCC>

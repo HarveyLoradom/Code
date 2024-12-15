@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Programmer</class>
+ <widget class="QMainWindow" name="Programmer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <property name="icon">
+     <iconset resource="rsc.qrc">
+      <normaloff>:/img/Menu.svg</normaloff>:/img/Menu.svg</iconset>
+    </property>
+    <addaction name="Standard"/>
+    <addaction name="Science"/>
+    <addaction name="Program"/>
+    <addaction name="Date"/>
+    <addaction name="separator"/>
+    <addaction name="Currency"/>
+    <addaction name="Capacity"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="Standard">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Standard.svg</normaloff>:/img/Standard.svg</iconset>
+   </property>
+   <property name="text">
+    <string>标准</string>
+   </property>
+   <property name="toolTip">
+    <string>标准</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Science">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Science.svg</normaloff>:/img/Science.svg</iconset>
+   </property>
+   <property name="text">
+    <string>科学</string>
+   </property>
+   <property name="toolTip">
+    <string>科学</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Program">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Programmer.svg</normaloff>:/img/Programmer.svg</iconset>
+   </property>
+   <property name="text">
+    <string>程序员</string>
+   </property>
+   <property name="toolTip">
+    <string>程序员</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Date">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Date.svg</normaloff>:/img/Date.svg</iconset>
+   </property>
+   <property name="text">
+    <string>日期计算</string>
+   </property>
+   <property name="toolTip">
+    <string>日期计算</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Currency">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Currency.svg</normaloff>:/img/Currency.svg</iconset>
+   </property>
+   <property name="text">
+    <string>货币</string>
+   </property>
+   <property name="toolTip">
+    <string>货币</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Capacity">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Capacity.svg</normaloff>:/img/Capacity.svg</iconset>
+   </property>
+   <property name="text">
+    <string>容量</string>
+   </property>
+   <property name="toolTip">
+    <string>容量</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="rsc.qrc"/>
+ </resources>
+ <connections/>
+</ui>
