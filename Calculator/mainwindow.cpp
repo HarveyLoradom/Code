@@ -1,8 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include"subject.h"
+#include"science.h"
 #include"programmer.h"
-#include"date.h"w
+#include"date.h"
+#include"currency.h"
+#include"capacity.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -261,26 +263,47 @@ void MainWindow::on_btnAddMinus_clicked()
     }
 }
 
-void MainWindow::on_Science_triggered()
-{
-    Subject *subject=new Subject();
-    subject->show();
-    this->hide();
-}
 
 
 void MainWindow::on_Programmer_triggered()
 {
     Programmer *programmer=new Programmer();
-    programmer->show();
     this->hide();
+    programmer->show();
+
 }
 
 
 void MainWindow::on_Date_triggered()
 {
     Date *date=new Date();
+     this->hide();
     date->show();
+
+}
+
+
+void MainWindow::on_Currency_triggered()
+{
+    Currency *currency=new Currency();
     this->hide();
+    currency->show();
+
+}
+
+
+void MainWindow::on_Capacity_triggered()
+{
+    Capacity *capacity=new Capacity();
+    this->hide();
+    capacity->show();
+}
+
+
+void MainWindow::on_Science_triggered()
+{
+    Science *science=new Science();
+    this->hide();
+    science->show();
 }
 

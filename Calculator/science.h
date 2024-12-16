@@ -1,33 +1,33 @@
-#ifndef CURRENCY_H
-#define CURRENCY_H
+#ifndef SCIENCE_H
+#define SCIENCE_H
 
 #include <QMainWindow>
 
 namespace Ui {
-class Currency;
+class Science;
 }
 
-class Currency : public QMainWindow
+class Science : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Currency(QWidget *parent = nullptr);
-    ~Currency();
+    explicit Science(QWidget *parent = nullptr);
+    ~Science();
 
 private slots:
-    void on_Science_triggered();
-
     void on_Standard_triggered();
 
     void on_Programmer_triggered();
 
     void on_Date_triggered();
 
+    void on_Currency_triggered();
+
     void on_Capacity_triggered();
 
 private:
-    Ui::Currency *ui;
+    Ui::Science *ui;
 };
 
-#endif // CURRENCY_H
+#endif // SCIENCE_H

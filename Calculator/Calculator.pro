@@ -9,26 +9,29 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    capacity.cpp \
     currency.cpp \
     date.cpp \
     main.cpp \
     mainwindow.cpp \
     programmer.cpp \
-    subject.cpp
+    science.cpp
 
 HEADERS += \
+    capacity.h \
     currency.h \
     date.h \
     mainwindow.h \
     programmer.h \
-    subject.h
+    science.h
 
 FORMS += \
+    capacity.ui \
     currency.ui \
     date.ui \
     mainwindow.ui \
     programmer.ui \
-    subject.ui
+    science.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

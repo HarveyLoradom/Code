@@ -55,5 +55,7 @@ private slots:
     void on_Science_triggered();
     void on_Programmer_triggered();
     void on_Date_triggered();
+    void on_Currency_triggered();
+    void on_Capacity_triggered();
 };
 #endif // MAINWINDOW_H
