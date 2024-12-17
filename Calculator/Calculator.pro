@@ -14,6 +14,7 @@ SOURCES += \
     date.cpp \
     main.cpp \
     mainwindow.cpp \
+    mylineedit.cpp \
     programmer.cpp \
     science.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     currency.h \
     date.h \
     mainwindow.h \
+    mylineedit.h \
     programmer.h \
     science.h
 

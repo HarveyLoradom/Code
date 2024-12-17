@@ -2,6 +2,9 @@
 #define CURRENCY_H
 
 #include <QMainWindow>
+#include<QMap>
+#include<QPushButton>
+#include"QLineEdit"
 
 namespace Ui {
 class Currency;
@@ -14,6 +17,11 @@ class Currency : public QMainWindow
 public:
     explicit Currency(QWidget *parent = nullptr);
     ~Currency();
+    double getExchangeRate(const QString &fromCurrency, const QString &toCurrency);
+    void convertCurrency();
+    QString Amount;
+    QMap<int,QPushButton*> digitBTNs;
+    QMap<int,QPushButton*> digitElse;
 
 private slots:
     void on_Science_triggered();
@@ -26,8 +34,23 @@ private slots:
 
     void on_Capacity_triggered();
 
+    void on_comboxEnd_activated();
+
+    void on_comboxStart_activated();
+
+
+    void btnNumClicked();
+    void on_btnPoint_clicked();
+    void on_btnCE_clicked();
+    void on_btnDelete_clicked();
+
+    void on_startEdit_clicked();
+    void on_endEdit_clicked();
+
 private:
     Ui::Currency *ui;
+
+
 };
 
 #endif // CURRENCY_H
