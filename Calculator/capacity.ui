@@ -56,7 +56,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLineEdit" name="StartCapacityEdit">
+           <widget class="MyLineEdit" name="StartCapacityEdit">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -77,7 +77,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>30</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
             <property name="alignment">
@@ -161,7 +161,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLineEdit" name="EndCapacityEdit">
+           <widget class="MyLineEdit" name="EndCapacityEdit">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -182,7 +182,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>30</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
             <property name="alignment">
@@ -235,7 +235,7 @@
             </item>
             <item>
              <property name="text">
-              <string>立方英尺</string>
+              <string>立方英寸</string>
              </property>
             </item>
             <item>
@@ -707,6 +707,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">mylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="rsc.qrc"/>
  </resources>

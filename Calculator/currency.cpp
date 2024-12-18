@@ -165,7 +165,7 @@ void Currency::btnNumClicked()
     int dotIndex = newAmount.indexOf('.');
     if (dotIndex == -1) {
         // 没有小数点，说明是整数部分，检查整数位长度
-        if (newAmount.length() > 5) {
+        if (newAmount.length() > 8) {
             return;  // 超出整数位最大长度限制，不进行输入
         }
     }
@@ -173,7 +173,7 @@ void Currency::btnNumClicked()
         // 有小数点，分别检查整数部分和小数部分长度
         QString integerPart = newAmount.left(dotIndex);
         QString decimalPart = newAmount.mid(dotIndex + 1);
-        if (integerPart.length() > 5 || decimalPart.length() > 2) {
+        if (integerPart.length() > 8 || decimalPart.length() > 2) {
             return;  // 超出位数限制，不进行输入
         }
     }
