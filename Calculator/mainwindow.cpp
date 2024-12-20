@@ -11,7 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    hasResult = false;
+    operand = "";
+    operands.clear();
+    opcodes.clear();
+    historyRecords.clear();
     digitBTNs={{Qt::Key_0,ui->btnNum0},
                  {Qt::Key_1,ui->btnNum1},
                  {Qt::Key_2,ui->btnNum2},
@@ -35,10 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     foreach(auto btn,digitBinarys)
         connect(btn,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    // connect(ui->btnMulti,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    // connect(ui->btnDivide,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    // connect(ui->btnSub,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
-    // connect(ui->btnAdd,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
 
     digitUnBinarys={{Qt::Key_Exclam,ui->btnDenominator},  //键盘的！
         {Qt::Key_At,ui->btnSqrt},  //键盘的@
@@ -48,10 +48,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     foreach(auto btn,digitUnBinarys)
         connect(btn,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
-    // connect(ui->btnF,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
-    // connect(ui->btnSqrt,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
-    // connect(ui->btnSquare,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
-    // connect(ui->btnPercent,SIGNAL(clicked()),this,SLOT(btnUnaryOperatorClicked()));
 
     digitElse={{Qt::Key_Period,ui->btnPoint},
         {Qt::Key_Return,ui->btnC},            //字母键盘的Enter键
@@ -80,7 +76,6 @@ void MainWindow::btnNumClicked()
     operand+=digit;
 
     ui->Display->setText(operand);
-    //ui->statusbar->showMessage( qobject_cast<QPushButton*>(sender())->text() + "btn clicked");
 }
 
 
@@ -123,7 +118,6 @@ void MainWindow::on_btnCE_clicked()
         operand="";
         ui->Display->setText(operand);
     }
-
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -149,41 +143,71 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 QString MainWindow::calculation(bool *ok)
 {
-    double result=0;
-    QString first=operands.front();
-    if(operands.size()==2&&opcodes.size()>0){
-        //取操作数
-        double operand1=operands.front().toDouble();
+    double result = 0;
+    QString first = operands.front();
+    if (operands.size() == 2 && opcodes.size() > 0) {
+        // 取操作数
+        double operand1 = operands.front().toDouble();
         operands.pop_front();
-        double operand2=operands.front().toDouble();
+        double operand2 = operands.front().toDouble();
         operands.pop_front();
 
-        //取操作符
-        QString op=opcodes.front();
+        // 取操作符
+        QString op = opcodes.front();
         opcodes.pop_front();
 
-        if(op=="+"){
-            result=operand1+operand2;
+        if (op == "+") {
+            result = operand1 + operand2;
         }
-        else if(op=="-"){
-            result=operand1-operand2;
+        else if (op == "-") {
+            result = operand1 - operand2;
         }
-        else if(op=="×"){
-            result=operand1*operand2;
+        else if (op == "×") {
+            result = operand1 * operand2;
         }
-        else if(op=="÷"){
-            result=operand1/operand2;
+        else if (op == "÷") {
+            if (operand2 == 0) {
+                // 处理除数为0的情况，这里简单设置错误信息并返回
+                if (ok) {
+                    *ok = false;
+                }
+                ui->statusbar->showMessage("除数不能为0");
+                return first;
+            }
+            result = operand1 / operand2;
         }
 
         operands.push_back(QString::number(result));
+
+        // 构建本次计算的表达式字符串
+        QString expression = QString("%1 %2 %3 = %4")
+                                 .arg(QString::number(operand1))
+                                 .arg(op)
+                                 .arg(QString::number(operand2))
+                                 .arg(QString::number(result));
+
+        // 将表达式添加到历史记录列表
+        historyRecords.append(expression);
+
+        // 更新显示历史记录的文本框内容
+        updateHistoryDisplay();
+
         return QString::number(result);
-        ui->statusbar->showMessage(QString("calculation is in progress operand is %1,opcode is %2").arg(operands.size()).arg(opcodes.size()));
     }
-    else{
-        ui->statusbar->showMessage(QString("operand is %1,opcode is %2").arg(operands.size()).arg(opcodes.size()));
+    else {
+        ui->statusbar->showMessage(QString("operand is %1, opcode is %2").arg(operands.size()).arg(opcodes.size()));
     }
 
     return first;
+}
+
+void MainWindow::updateHistoryDisplay()
+{
+    QString historyText;
+    for (const QString &record : historyRecords) {
+        historyText += record + "\n";
+    }
+    ui->HistoryText->setText(historyText);
 }
 
 void MainWindow::btnBinaryOperatorClicked()
@@ -277,7 +301,7 @@ void MainWindow::on_Programmer_triggered()
 void MainWindow::on_Date_triggered()
 {
     Date *date=new Date();
-     this->hide();
+    this->hide();
     date->show();
 
 }
@@ -306,4 +330,3 @@ void MainWindow::on_Science_triggered()
     this->hide();
     science->show();
 }
-

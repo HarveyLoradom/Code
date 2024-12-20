@@ -516,6 +516,11 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
           <property name="layoutDirection">
            <enum>Qt::LayoutDirection::LeftToRight</enum>
           </property>
@@ -795,6 +800,14 @@
             <width>16777215</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LayoutDirection::LeftToRight</enum>
           </property>
          </widget>
         </item>

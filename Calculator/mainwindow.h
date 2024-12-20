@@ -22,13 +22,19 @@ public:
     ~MainWindow();
     QString operand;
     QString opcode;
-    QStack<QString> operands;
-    QStack<QString> opcodes;
+    QList<QString> operands;
+    QList<QString> opcodes;
+
     QMap<int,QPushButton*> digitBTNs;
     QMap<int,QPushButton*> digitBinarys;
     QMap<int,QPushButton*> digitUnBinarys;
     QMap<int,QPushButton*> digitElse;
+
     QString calculation(bool *ok=NULL);
+    QList<QString> historyRecords;
+
+    void updateHistoryDisplay();
+    bool hasResult;
 
 private:
     Ui::MainWindow *ui;
