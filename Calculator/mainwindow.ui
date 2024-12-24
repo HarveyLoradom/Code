@@ -35,6 +35,9 @@
    <iconset>
     <normaloff>:/img/calculator.png</normaloff>:/img/calculator.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <property name="leftMargin">
@@ -187,6 +190,9 @@
               <width>16777215</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>1</string>
@@ -488,6 +494,9 @@
               <width>16777215</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>=</string>

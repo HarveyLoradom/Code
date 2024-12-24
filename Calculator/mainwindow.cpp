@@ -105,6 +105,8 @@ void MainWindow::on_btnC_clicked()
         operand="";
         ui->Display->setText(operand);
     }
+    historyRecords.clear();
+    updateHistoryDisplay();
 }
 
 void MainWindow::on_btnCE_clicked()
@@ -118,6 +120,8 @@ void MainWindow::on_btnCE_clicked()
         operand="";
         ui->Display->setText(operand);
     }
+    historyRecords.clear();
+    updateHistoryDisplay();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -194,9 +198,7 @@ QString MainWindow::calculation(bool *ok)
 
         return QString::number(result);
     }
-    else {
-        ui->statusbar->showMessage(QString("operand is %1, opcode is %2").arg(operands.size()).arg(opcodes.size()));
-    }
+
 
     return first;
 }
@@ -233,24 +235,59 @@ void MainWindow::btnBinaryOperatorClicked()
 
 void MainWindow::btnUnaryOperatorClicked()
 {
-    if(operands.size()==0)
+    QString expression;
+    if (operands.size() == 0)
         operands.push_back(operand);
-    if(operands.size()>0){
-        QString oper=operands.front();
+    if (operands.size() > 0) {
+        QString oper = operands.front();
         operands.pop_front();
-        double result=oper.toDouble();
-        operand="";
-        QString op=qobject_cast<QPushButton*>(sender())->text();
-        if(op=="%")
-            result/=100.0;
-        else if(op == "1/x")
-            result=1/result;
-        else if(op=="x²")
-            result*=result;
-        else if(op=="²√x")
-            result=sqrt(result);
+        double result = oper.toDouble();
+        operand = "";
+        QString op = qobject_cast<QPushButton*>(sender())->text();
+
+        // 记录原始操作数，用于构建表达式字符串
+        QString originalOperand = QString::number(result);
+
+        if (op == "%") {
+            result /= 100.0;
+            expression = QString("%1 %2 = %3")
+                             .arg(originalOperand)
+                             .arg(op)
+                             .arg(QString::number(result));
+        }
+        else if (op == "1/x"){
+            result = 1 / result;
+            expression = QString("%1 %2 = %3")
+                             .arg("1/")
+                             .arg(originalOperand)
+                             .arg(QString::number(result));
+        }
+        else if (op == "x²"){
+            result *= result;
+            expression = QString("%1 %2 = %3")
+                             .arg(originalOperand)
+                             .arg("^2")
+                             .arg(QString::number(result));
+        }
+        else if (op == "²√x"){
+            result = std::sqrt(result);
+            expression = QString("%1 %2 = %3")
+                             .arg("√")
+                             .arg(originalOperand)
+                             .arg(QString::number(result));
+        }
+
         ui->Display->setText(QString::number(result));
         operands.push_back(QString::number(result));
+
+        // 构建本次单目运算符计算的表达式字符串
+
+
+        // 将表达式添加到历史记录列表
+        historyRecords.append(expression);
+
+        // 更新显示历史记录的文本框内容
+        updateHistoryDisplay();
     }
 }
 
@@ -267,6 +304,7 @@ void MainWindow::on_btnEqual_clicked()
 
 void MainWindow::on_btnAddMinus_clicked()
 {
+
     if(operands.size()==0&&operand!=""){
         operands.push_back(operand);
     }
@@ -277,14 +315,19 @@ void MainWindow::on_btnAddMinus_clicked()
             double result=operand.toDouble();
             ui->Display->setText(QString::number(result));
             operands.push_back(QString::number(result));
+
         }
         else{
             double result=operand.toDouble();
             result=0-result;
             ui->Display->setText(QString::number(result));
             operands.push_back(QString::number(result));
+
         }
+
     }
+
+
 }
 
 

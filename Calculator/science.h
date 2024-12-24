@@ -29,6 +29,7 @@ public:
 
     void updateHistoryDisplay();
     bool hasResult;
+    bool isCheckedState;
 
 
 
@@ -55,6 +56,11 @@ private slots:
     void btnBinaryOperatorClicked();
     void btnUnaryOperatorClicked();
     void on_btnAddMinus_clicked();
+
+
+    void on_btn2andND_clicked();
+
+    void on_btnLog_clicked();
 
 private:
     Ui::Science *ui;

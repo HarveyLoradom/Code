@@ -41,6 +41,11 @@
         <height>50</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
@@ -49,7 +54,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="3">
+    <item row="0" column="1" rowspan="4">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -93,7 +98,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_9">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QPushButton" name="btnHEX">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>HEX</string>
           </property>
@@ -117,7 +128,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QPushButton" name="btnDEC">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>DEC</string>
           </property>
@@ -141,7 +158,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QPushButton" name="btnOCT">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>OCT</string>
           </property>
@@ -165,7 +188,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QPushButton" name="btnBIN">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>BIN</string>
           </property>
@@ -189,6 +218,143 @@
      </layout>
     </item>
     <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>3</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>30</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>按位</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>AND</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>OR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>NOT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>NAND</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>NOR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>XOR</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>30</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>位移位</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>算术移位</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>逻辑移位</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>旋转循环移位</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>带进位旋转循环移位</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_6">

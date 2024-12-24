@@ -785,7 +785,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QTextEdit" name="HistoryText"/>
+         <widget class="QTextEdit" name="HistoryText">
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
