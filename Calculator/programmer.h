@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QPainter>
+#include<QLineEdit>
 namespace Ui {
 class Programmer;
 }
@@ -26,12 +27,27 @@ public:
     QMap<int,QPushButton*> digitBIN;
     QMap<int,QPushButton*> digitALL;
 
-    QString operand;
+    QString operandHEX;
+    QString operandDEC;
+    QString operandOCT;
+    QString operandBIN;
+
+    QString *operand;
     QString opcode;
-    QList<QString> operands;
+    QList<QString> operandHEXs;
+    QList<QString> operandDECs;
+    QList<QString> operandOCTs;
+    QList<QString> operandBINs;
     QList<QString> opcodes;
+    QList<QString> operands;
+
+
+    QList<QLineEdit*> Edit;
+
+    QString calculation(bool *ok=NULL);
 
 private slots:
+
     void on_Science_triggered();
 
     void on_Date_triggered();
@@ -54,6 +70,7 @@ private slots:
 
     void setButtonDisable(QMap<int,QPushButton*> digit);
     void setButtonEnable();
+    void setTextReadOnly(QLineEdit *text);
 
     void btnHEX_clicked();
     void btnDEC_clicked();
@@ -61,6 +78,12 @@ private slots:
     void btnBIN_clicked();
 
     void on_btnCE_clicked();
+
+    void toChange(QString operand);
+
+    void btnBinaryOperatorClicked();
+    void on_btnEqual_clicked();
+
 
 private:
     Ui::Programmer *ui;

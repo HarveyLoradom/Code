@@ -6,7 +6,7 @@
 #include"capacity.h"
 #include"science.h"
 #include<QPainter>
-
+#include<QString>
 
 
 Programmer::Programmer(QWidget *parent)
@@ -120,7 +120,18 @@ Programmer::Programmer(QWidget *parent)
         {Qt::Key_8,ui->btnNum8},
         {Qt::Key_9,ui->btnNum9},
     };
-    setButtonDisable(digitHEX);
+
+    Edit={ui->DisplayHEX,ui->DisplayOCT,ui->DisplayDEC,ui->DisplayBIN};
+    ui->DisplayHEX->setReadOnly(true);
+
+    digitBinarys={{Qt::Key_Asterisk,ui->btnMulti},
+                    {Qt::Key_Slash,ui->btnDivide},
+                    {Qt::Key_Plus,ui->btnAdd},
+                    {Qt::Key_Minus,ui->btnMinus},
+                    };
+
+    foreach(auto btn,digitBinarys)
+        connect(btn,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
 }
 
 Programmer::~Programmer()
@@ -172,6 +183,7 @@ void Programmer::on_Science_triggered()
 
 void Programmer::on_btnHEX_clicked()
 {
+    setTextReadOnly(ui->DisplayHEX);
     setButtonBackgroundColor(ui->btnHEX);
     setButtonEnable();
     setButtonDisable(digitHEX);
@@ -181,6 +193,7 @@ void Programmer::on_btnHEX_clicked()
 
 void Programmer::on_btnDEC_clicked()
 {
+    setTextReadOnly(ui->DisplayDEC);
     setButtonBackgroundColor(ui->btnDEC);
     setButtonEnable();
     setButtonDisable(digitDEC);
@@ -189,6 +202,7 @@ void Programmer::on_btnDEC_clicked()
 
 void Programmer::on_btnOCT_clicked()
 {
+    setTextReadOnly(ui->DisplayOCT);
     setButtonBackgroundColor(ui->btnOCT);
     setButtonEnable();
     setButtonDisable(digitOCT);
@@ -197,6 +211,7 @@ void Programmer::on_btnOCT_clicked()
 
 void Programmer::on_btnBIN_clicked()
 {
+    setTextReadOnly(ui->DisplayBIN);
     setButtonBackgroundColor(ui->btnBIN);
     setButtonEnable();
     setButtonDisable(digitBIN);
@@ -225,86 +240,344 @@ void Programmer::setButtonEnable()
         btn->setEnabled(true);
 }
 
+void Programmer::setTextReadOnly(QLineEdit *text)
+{
+    foreach(auto edit,Edit){
+        if(edit==text)
+            edit->setReadOnly(true);
+        else
+            edit->setReadOnly(false);
+    }
+}
+
 void Programmer::btnHEX_clicked()
 {
+    if(ui->DisplayHEX->isReadOnly()){
+        QString digit=qobject_cast<QPushButton*>(sender())->text();
 
+        if(digit=="0"&&operandHEX=="0")
+            digit="";
+
+        if(digit!="0"&&operandHEX=="0")
+            operandHEX="";
+
+        operandHEX+=digit;
+
+        ui->Display->setText(operandHEX);
+        toChange(operandHEX);
+    }
 }
 
 void Programmer::btnDEC_clicked()
 {
+    if(ui->DisplayDEC->isReadOnly()){
+        QString digit=qobject_cast<QPushButton*>(sender())->text();
 
-}
+        if(digit=="0"&&operandDEC=="0")
+            digit="";
 
-void Programmer::btnOCT_clicked()
-{
+        if(digit!="0"&&operandDEC=="0")
+            operandDEC="";
 
+        operandDEC+=digit;
+
+        ui->Display->setText(operandDEC);
+        toChange(operandDEC);
+    }
 }
 
 void Programmer::btnBIN_clicked()
 {
-    // 获取发送信号的按钮对象（这里假设你的按钮点击信号正确连接到此槽函数）
-    QPushButton *clickedButton = qobject_cast<QPushButton*>(sender());
-    if (!clickedButton)
-    {
-        return;  // 如果转换失败，直接返回，避免后续错误
-    }
+    if (ui->DisplayBIN->isReadOnly()) {
+        QString digit = qobject_cast<QPushButton*>(sender())->text();
 
-    QString buttonText = clickedButton->text();
-
-    // 将按钮文本转换为对应的二进制位（这里限定只处理 '0' 和 '1' 的输入）
-    bool ok;
-    int currentDigit = buttonText.toInt(&ok, 2);
-    if (!ok || (currentDigit!= 0 && currentDigit!= 1))
-    {
-        return;  // 如果转换失败或者输入不是0或1，直接返回，不处理
-    }
-
-    // 如果操作数为空且点击的是0，保持显示0
-    if (operand.isEmpty() && currentDigit == 0)
-    {
-        operand = "0";
-    }
-    else if (operand.isEmpty() && currentDigit == 1)
-    {
-        operand = "0001";
-    }
-    else
-    {
-        // 操作数不为空时的处理逻辑
-        if (currentDigit == 0)
-        {
-            // 进行左移操作（整体左移一位，高位补0，低位舍弃）
-            operand = operand.left(operand.length() - 1) + "0";
-        }
-        else
-        {
-            // 将操作数转换为十进制整数
-            int decimalOperand = operand.toInt(nullptr, 2);
-            // 按照二进制加法规则，在最低位加1
-            decimalOperand += 1;
-            // 将新的十进制结果转换回二进制字符串
-            operand = QString::number(decimalOperand, 2);
-            // 确保操作数始终保持4位宽度，不足前面补0
-            operand = operand.rightJustified(4, '0');
+        // 如果点击的是0且当前操作数也是0，去除这个0（避免多个前导0）
+        if (digit == "0" && operandBIN == "0") {
+            digit = "";
         }
 
-        // 检查位数是否达到需要补齐的条件，进行补齐操作
-        int numGroups = operand.length() / 4;
-        if (operand.length() % 4!= 0)
-        {
-            numGroups++;
+        // 如果点击的不是0但当前操作数是0，清空当前操作数，准备重新输入
+        if (digit!= "0" && operandBIN == "0") {
+            operandBIN = "";
         }
-        int targetLength = numGroups * 4;
-        operand = operand.rightJustified(targetLength, '0');
+
+        operandBIN += digit;
+        QString displayBIN;
+        // 获取当前二进制数字的总长度
+        int binLength = operandBIN.size();
+
+        // 判断当前长度除以4的余数，若余数为0，表示刚好是4的倍数，不需要补零
+        if ((binLength % 4 !=0)) {
+            // 计算需要补零的位数
+            int zerosToAdd = 4 - (binLength % 4);
+            QString zeros = QString("0").repeated(zerosToAdd);
+
+            // 在前面添加零
+            displayBIN = zeros + operandBIN;
+        }
+        else if(binLength%4==0){
+            displayBIN=operandBIN;
+        }
+
+        ui->Display->setText(displayBIN);
+        toChange(operandBIN);
+    }
+}
+
+void Programmer::btnOCT_clicked()
+{
+    if(ui->DisplayOCT->isReadOnly()){
+        QString digit=qobject_cast<QPushButton*>(sender())->text();
+
+        if(digit=="0"&&operandOCT=="0")
+            digit="";
+        if(digit!="0"&&operandOCT=="0")
+            operandOCT="";
+        operandOCT+=digit;
+
+        ui->Display->setText(operandOCT);
+
+        toChange(operandOCT);
+    }
+}
+
+
+
+void Programmer::toChange(QString operand)
+{
+    if(ui->DisplayDEC->isReadOnly()){
+        bool ok;
+        int decimal = operand.toInt(&ok);
+        if (!ok) {
+            qDebug() << "输入的不是合法的十进制数字字符串";
+            return;
+        }
+        ui->DisplayDEC->setText(operand);
+        // 转换为二进制
+        QString binary = QString::number(decimal, 2);
+        int length = binary.length();
+        int paddingLength = 4 - (length % 4);
+        if (length % 4!= 0) {
+            binary = QString(paddingLength, '0').append(binary);
+        }
+        ui->DisplayBIN->setText(binary);
+
+        // 转换为八进制
+        QString octal = QString::number(decimal, 8);
+        ui->DisplayOCT->setText(octal);
+
+        // 转换为十六进制
+        QString hexadecimal = QString::number(decimal, 16).toUpper();  // 转换为大写形式的十六进制字符串表示
+        ui->DisplayHEX->setText(hexadecimal);
+    }
+    else if(ui->DisplayHEX->isReadOnly()){
+        bool ok;
+        int hexadecimal = operand.toInt(&ok, 16);
+        if (!ok) {
+            qDebug() << "输入的不是合法的十六进制数字字符串";
+            return;
+        }
+        ui->DisplayHEX->setText(operand);
+        // 转换为二进制
+        QString binary = QString::number(hexadecimal, 2);
+        int length = binary.length();
+        int paddingLength = 4 - (length % 4);
+        if (length % 4!= 0) {
+            binary = QString(paddingLength, '0').append(binary);
+        }
+
+        ui->DisplayBIN->setText(binary);
+
+        // 转换为八进制
+        QString octal = QString::number(hexadecimal, 8);
+        ui->DisplayOCT->setText(octal);
+
+        // 转换为十进制
+        QString decimal = QString::number(hexadecimal, 10).toUpper();  // 转换为大写形式的十六进制字符串表示
+        ui->DisplayDEC->setText(decimal);
+    }
+    else if(ui->DisplayOCT->isReadOnly()){
+        bool ok;
+        int octal = operand.toInt(&ok, 8);
+        if (!ok) {
+            qDebug() << "输入的不是合法的八进制数字字符串";
+            return;
+        }
+        ui->DisplayOCT->setText(operand);
+        // 转换为二进制
+        QString binary = QString::number(octal, 2);
+        int length = binary.length();
+        int paddingLength = 4 - (length % 4);
+        if (length % 4!= 0) {
+            binary = QString(paddingLength, '0').append(binary);
+        }
+
+        ui->DisplayBIN->setText(binary);
+
+        // 转换为十进制
+        QString decimal = QString::number(octal, 10);
+        ui->DisplayDEC->setText(decimal);
+
+        // 转换为十六进制
+        QString hexadecimal = QString::number(octal, 16).toUpper();  // 转换为大写形式的十六进制字符串表示
+        ui->DisplayHEX->setText(hexadecimal);
+    }
+    else if(ui->DisplayBIN->isReadOnly()){
+        bool ok;
+        int binary = operand.toInt(&ok, 2);
+        if (!ok) {
+            qDebug() << "输入的不是合法的二进制数字字符串";
+            return;
+        }
+        ui->DisplayBIN->setText(operand);
+        // 转换为八进制
+        QString octal = QString::number(binary, 8);
+        ui->DisplayOCT->setText(octal);
+
+        // 转换为十进制
+        QString decimal = QString::number(binary, 10);
+        ui->DisplayDEC->setText(decimal);
+
+        // 转换为十六进制
+        QString hexadecimal = QString::number(binary, 16).toUpper();  // 转换为大写形式的十六进制字符串表示
+        ui->DisplayHEX->setText(hexadecimal);
     }
 
-
-    ui->Display->setText(operand);
 }
 
 
 void Programmer::on_btnCE_clicked()
 {
-    ui->Display->setText("");
+    if(operandHEXs.size()==0||operandOCTs.size()==0||operandDECs.size()==0||operandBINs.size()==0){
+        operandHEXs.push_back(operandHEX);
+        operandDECs.push_back(operandDEC);
+        operandOCTs.push_back(operandOCT);
+        operandBINs.push_back(operandBIN);
+    }
+    if(operandHEXs.size()>0||operandOCTs.size()>0||operandDECs.size()>0||operandBINs.size()>0){
+        operands.clear();
+        opcodes.clear();
+        operandHEX="";
+        operandOCT="";
+        operandBIN="";
+        operandDEC="";
+        ui->Display->setText(operandHEX);
+        ui->Display->setText(operandOCT);
+        ui->Display->setText(operandBIN);
+        ui->Display->setText(operandDEC);
+
+        QString oper="";
+        foreach(auto edit,Edit)
+            edit->setText(oper);
+    }
 }
 
+void Programmer::on_btnEqual_clicked()
+{
+    if(*operand!=""){
+        operands.push_back(*operand);
+        *operand="";
+        QString result=calculation();
+        ui->Display->setText(result);
+        qDebug()<<result;
+        toChange(result);
+    }
+}
+
+void Programmer::btnBinaryOperatorClicked()
+{
+    if(ui->DisplayHEX->isReadOnly())
+        operand=&operandHEX;
+    else if(ui->DisplayDEC->isReadOnly())
+        operand=&operandDEC;
+    else if(ui->DisplayOCT->isReadOnly())
+        operand=&operandOCT;
+    else if(ui->DisplayBIN->isReadOnly())
+        operand=&operandBIN;
+
+    QString opcode=qobject_cast<QPushButton*>(sender())->text();
+    if(*operand!=""){
+        operands.push_back(*operand);
+        *operand="";
+        opcodes.push_back(opcode);
+        QString result=calculation();
+        ui->Display->setText(result);
+        toChange(result);
+
+    }
+    else if(*operand==""&&operands.size()==1&&opcodes.size()==0){
+        opcodes.push_back(opcode);
+        QString result=calculation();
+        ui->Display->setText(result);
+        toChange(result);
+    }
+}
+
+QString Programmer::calculation(bool *ok)
+{
+    int result = 0;
+    int change=0;
+    QString first = operands.front();
+    if (operands.size() == 2 && opcodes.size() > 0) {
+        // 取操作数
+        if(ui->DisplayHEX->isReadOnly()){
+            change=16;
+        }
+        else if(ui->DisplayDEC->isReadOnly()){
+            change=10;
+        }
+        else if(ui->DisplayOCT->isReadOnly()){
+            change=8;
+        }
+        else if(ui->DisplayBIN->isReadOnly()){
+            change=2;
+        }
+        int operand1 = operands.front().toInt(nullptr, change);
+
+        operands.pop_front();
+        int operand2 = operands.front().toInt(nullptr, change);
+        operands.pop_front();
+        // 取操作符
+        QString op = opcodes.front();
+        opcodes.pop_front();
+
+        if (op == "+") {
+            result = operand1 + operand2;
+        }
+        else if (op == "-") {
+            result = operand1 - operand2;
+        }
+        else if (op == "×") {
+            result = operand1 * operand2;
+        }
+        else if (op == "÷") {
+            if (operand2 == 0) {
+                // 处理除数为0的情况，这里简单设置错误信息并返回
+                if (ok) {
+                    *ok = false;
+                }
+                return first;
+            }
+            result = operand1 / operand2;
+        }
+        QString resultstr;
+        if(ui->DisplayHEX->isReadOnly()){
+            resultstr = QString::number(result, 16).toUpper();
+        }
+        else if(ui->DisplayDEC->isReadOnly()){
+            resultstr = QString::number(result, 10);
+        }
+        else if(ui->DisplayOCT->isReadOnly()){
+            resultstr = QString::number(result, 8);
+        }
+        else if(ui->DisplayBIN->isReadOnly()){
+            resultstr = QString::number(result, 2);
+        }
+
+        operands.push_back(resultstr);
+
+        return resultstr;
+    }
+
+    return first;
+}
