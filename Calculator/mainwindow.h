@@ -63,5 +63,10 @@ private slots:
     void on_Date_triggered();
     void on_Currency_triggered();
     void on_Capacity_triggered();
+    void on_Theme_triggered();
+    void on_Background_triggered();
+    void on_Font_triggered();
+    void on_FontColor_triggered();
+    void on_FontBackgroundColor_triggered();
 };
 #endif // MAINWINDOW_H

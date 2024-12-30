@@ -27,6 +27,8 @@ public:
     QMap<int,QPushButton*> digitBIN;
     QMap<int,QPushButton*> digitALL;
 
+    QMap<int,QPushButton*> digitShift;
+
     QString operandHEX;
     QString operandDEC;
     QString operandOCT;
@@ -84,6 +86,20 @@ private slots:
     void btnBinaryOperatorClicked();
     void on_btnEqual_clicked();
 
+
+    void on_btnDelete_clicked();
+
+
+
+    void on_Theme_triggered();
+
+    void on_Background_triggered();
+
+    void on_Font_triggered();
+
+    void on_FontColor_triggered();
+
+    void on_FontBackgroundColor_triggered();
 
 private:
     Ui::Programmer *ui;

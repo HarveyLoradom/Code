@@ -7,5 +7,10 @@
         <file>img/Programmer.svg</file>
         <file>img/Science.svg</file>
         <file>img/Standard.svg</file>
+        <file>img/background.svg</file>
+        <file>img/font.svg</file>
+        <file>img/Theme.svg</file>
+        <file>img/FontBackgroundColor.svg</file>
+        <file>img/FontColor.svg</file>
     </qresource>
 </RCC>

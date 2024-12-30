@@ -31,6 +31,22 @@
   <property name="windowTitle">
    <string>计算器</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"> QMainWindow {
+ background-color: #F3F3F3;
+ color: black; }
+ QPushButton {
+ background-color: #FFFFFF; 
+color: black; 
+font-size:15px;
+border: 1px solid #ccc;
+ border-radius: 4px; }
+#btnEqual{
+background-color:#8E3AA7;
+}
+ QPushButton:hover { 
+background-color: #F3F3F3; }</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -38,12 +54,12 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>50</height>
+        <height>60</height>
        </size>
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="alignment">
@@ -218,141 +234,7 @@
      </layout>
     </item>
     <item row="2" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Minimum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>3</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>30</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>按位</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>AND</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>OR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>NOT</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>NAND</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>NOR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>XOR</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>30</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>位移位</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>算术移位</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>逻辑移位</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>旋转循环移位</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>带进位旋转循环移位</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" name="horizontalLayout_7"/>
     </item>
     <item row="3" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -833,7 +715,18 @@
     <addaction name="Currency"/>
     <addaction name="Capacity"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="Theme"/>
+    <addaction name="Background"/>
+    <addaction name="Font"/>
+    <addaction name="FontColor"/>
+    <addaction name="FontBackgroundColor"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <action name="Standard">
    <property name="icon">
@@ -920,6 +813,66 @@
    </property>
    <property name="toolTip">
     <string>容量</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Theme">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Theme.svg</normaloff>:/img/Theme.svg</iconset>
+   </property>
+   <property name="text">
+    <string>主题</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Background">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/background.svg</normaloff>:/img/background.svg</iconset>
+   </property>
+   <property name="text">
+    <string>主题背景</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Font">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/font.svg</normaloff>:/img/font.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="FontColor">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/FontColor.svg</normaloff>:/img/FontColor.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="FontBackgroundColor">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/FontBackgroundColor.svg</normaloff>:/img/FontBackgroundColor.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体背景色</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

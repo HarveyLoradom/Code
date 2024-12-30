@@ -6,6 +6,9 @@
 #include"capacity.h"
 #include"mainwindow.h"
 #include"mylineedit.h"
+#include <QColorDialog>
+#include<QFontDialog>
+
 
 Currency::Currency(QWidget *parent)
     : QMainWindow(parent)
@@ -78,17 +81,23 @@ void Currency::convertCurrency()
 {
     MyLineEdit *FromEdit=new MyLineEdit();
     MyLineEdit *ToEdit=new MyLineEdit();
+    QString currencyFrom=ui->comboxStart->currentText();
+    QString currencyTo=ui->comboxEnd->currentText();
     if(ui->StartCurrencyEdit->isReadOnly()){
         ToEdit=ui->StartCurrencyEdit;
         FromEdit=ui->EndCurrencyEdit;
+        currencyFrom=ui->comboxEnd->currentText();
+        currencyTo=ui->comboxStart->currentText();
+
     }
     else{
         ToEdit=ui->EndCurrencyEdit;
         FromEdit=ui->StartCurrencyEdit;
+        currencyFrom=ui->comboxStart->currentText();
+        currencyTo=ui->comboxEnd->currentText();
     }
 
-    QString currencyFrom=ui->comboxStart->currentText();
-    QString currencyTo=ui->comboxEnd->currentText();
+
     double amount = FromEdit->text().toDouble();
 
     double exchangeRate = getExchangeRate(currencyFrom, currencyTo);
@@ -241,4 +250,85 @@ void Currency::on_endEdit_clicked()
 }
 
 
+
+
+void Currency::on_Theme_triggered()
+{
+    static bool isDayMode = false;  // 初始化为白天模式，使用静态变量来记住当前模式状态
+    if (this) {  // 直接使用this指针判断当前对象是否有效
+        QString styleSheet;
+        if (isDayMode) {
+            // 白天模式的样式表内容，这里可以根据实际需求详细定义各种部件的样式
+            styleSheet = "QMainWindow { background-color: #F3F3F3; color: black; }"
+                         " QPushButton {background-color: #FFFFFF; color: black; font-size:15px;border: 1px solid #ccc;border-radius: 4px; }"
+                         " QPushButton:hover {background-color: #F3F3F3; }"
+                            "MyLineEdit {color:black}";
+            isDayMode = false;
+        }
+        else {
+            // 夜间模式的样式表内容，同样可按需细致调整样式规则
+            styleSheet = "QMainWindow { background-color: #404040; color: white; }"
+                         " QPushButton {background-color: #696969; color: white; font-size:15px;border: 1px solid #ccc;border-radius: 4px; }"
+                         " QPushButton:hover {background-color: #404040; }"
+                            "MyLineEdit {color:white}";
+            isDayMode = true;
+        }
+        this->setStyleSheet(styleSheet);
+    }
+}
+
+
+void Currency::on_Background_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        setStyleSheet(QString("QMainWindow{background-color: %1;}").arg(selectedColor.name()));
+    }
+}
+
+
+void Currency::on_Font_triggered()
+{
+    QFontDialog fontDialog(this);
+    QFont selectedFont = fontDialog.currentFont();
+    bool ok;
+    selectedFont = fontDialog.getFont(&ok, selectedFont, this);
+    if (ok) {
+        QList<QWidget*> allWidgets = findChildren<QWidget*>();
+        for (QWidget* widget : allWidgets) {
+            QPushButton* button = qobject_cast<QPushButton*>(widget);
+            if (button) {
+                button->setFont(selectedFont);
+            }
+
+        }
+        ui->StartCurrencyEdit->setFont(selectedFont);
+        ui->EndCurrencyEdit->setFont(selectedFont);
+        ui->comboxStart->setFont(selectedFont);
+        ui->comboxEnd->setFont(selectedFont);
+    }
+
+}
+
+
+void Currency::on_FontColor_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        QString styleSheet = QString("QPushButton {color: %1;} MyLineEdit {color: %1;} QComboBox{color:%1;}").arg(selectedColor.name());
+        setStyleSheet(styleSheet);
+    }
+}
+
+
+void Currency::on_FontBackgroundColor_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        setStyleSheet(QString("QPushButton {background-color: %1;}").arg(selectedColor.name()));
+    }
+}
 

@@ -7,6 +7,9 @@
 #include"science.h"
 #include<QPainter>
 #include<QString>
+#include <QColorDialog>
+#include<QFontDialog>
+
 
 
 Programmer::Programmer(QWidget *parent)
@@ -128,10 +131,14 @@ Programmer::Programmer(QWidget *parent)
                     {Qt::Key_Slash,ui->btnDivide},
                     {Qt::Key_Plus,ui->btnAdd},
                     {Qt::Key_Minus,ui->btnMinus},
+        {Qt::Key_Bluetooth,ui->btnRightRight},
+        {Qt::Key_ContrastAdjust,ui->btnLeftLeft},
+                    {Qt::Key_New,ui->btnPercent},
                     };
 
     foreach(auto btn,digitBinarys)
         connect(btn,SIGNAL(clicked()),this,SLOT(btnBinaryOperatorClicked()));
+
 }
 
 Programmer::~Programmer()
@@ -334,9 +341,7 @@ void Programmer::btnOCT_clicked()
         if(digit!="0"&&operandOCT=="0")
             operandOCT="";
         operandOCT+=digit;
-
         ui->Display->setText(operandOCT);
-
         toChange(operandOCT);
     }
 }
@@ -429,7 +434,13 @@ void Programmer::toChange(QString operand)
             qDebug() << "输入的不是合法的二进制数字字符串";
             return;
         }
-        ui->DisplayBIN->setText(operand);
+        QString binarystr = QString::number(binary, 2);
+        int length = binarystr.length();
+        int paddingLength = 4 - (length % 4);
+        if (length % 4!= 0) {
+            binarystr = QString(paddingLength, '0').append(binarystr);
+        }
+        ui->DisplayBIN->setText(binarystr);
         // 转换为八进制
         QString octal = QString::number(binary, 8);
         ui->DisplayOCT->setText(octal);
@@ -479,7 +490,6 @@ void Programmer::on_btnEqual_clicked()
         *operand="";
         QString result=calculation();
         ui->Display->setText(result);
-        qDebug()<<result;
         toChange(result);
     }
 }
@@ -560,6 +570,15 @@ QString Programmer::calculation(bool *ok)
             }
             result = operand1 / operand2;
         }
+        else if(op=="<<"){
+            result=operand1<<=operand2;
+        }
+        else if(op==">>"){
+            result=operand1>>=operand2;
+        }
+        else if(op=="%"){
+            result=std::fmod(operand1, operand2);
+        }
         QString resultstr;
         if(ui->DisplayHEX->isReadOnly()){
             resultstr = QString::number(result, 16).toUpper();
@@ -581,3 +600,109 @@ QString Programmer::calculation(bool *ok)
 
     return first;
 }
+
+void Programmer::on_btnDelete_clicked()
+{
+    if(ui->DisplayHEX->isReadOnly()){
+        operandHEX=operandHEX.left(operandHEX.length()-1);
+        ui->Display->setText(operandHEX);
+        toChange(operandHEX);
+    }
+    else if(ui->DisplayDEC->isReadOnly()){
+        operandDEC=operandDEC.left(operandDEC.length()-1);
+        ui->Display->setText(operandDEC);
+        toChange(operandDEC);
+    }
+    else if(ui->DisplayOCT->isReadOnly()){
+        operandOCT=operandOCT.left(operandOCT.length()-1);
+        ui->Display->setText(operandOCT);
+        toChange(operandOCT);
+    }
+    else if(ui->DisplayBIN->isReadOnly()){
+        operandBIN=operandBIN.left(operandBIN.length()-1);
+        ui->Display->setText(operandBIN);
+        toChange(operandBIN);
+    }
+}
+
+
+
+
+
+void Programmer::on_Theme_triggered()
+{
+    static bool isDayMode = false;  // 初始化为白天模式，使用静态变量来记住当前模式状态
+    if (this) {  // 直接使用this指针判断当前对象是否有效
+        QString styleSheet;
+        if (isDayMode) {
+            // 白天模式的样式表内容，这里可以根据实际需求详细定义各种部件的样式
+            styleSheet = "QMainWindow { background-color: #F3F3F3; color: black; }"
+                         " QPushButton {background-color: #FFFFFF; color: black; font-size:15px;border: 1px solid #ccc;border-radius: 4px; }"
+                         "#btnEqual{background-color:#8E3AA7;}"
+                         " QPushButton:hover {background-color: #F3F3F3; }";
+            isDayMode = false;
+        }
+        else {
+            // 夜间模式的样式表内容，同样可按需细致调整样式规则
+            styleSheet = "QMainWindow { background-color: #404040; color: white; }"
+                         " QPushButton {background-color: #696969; color: white; font-size:15px;border: 1px solid #ccc;border-radius: 4px; }"
+                         "#btnEqual{background-color:#8E3AA7;}"
+                         " QPushButton:hover {background-color: #404040; }";
+            isDayMode = true;
+        }
+        this->setStyleSheet(styleSheet);
+    }
+}
+
+
+void Programmer::on_Background_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        setStyleSheet(QString("QMainWindow{background-color: %1;}").arg(selectedColor.name()));
+    }
+}
+
+
+void Programmer::on_Font_triggered()
+{
+    QFontDialog fontDialog(this);
+    QFont selectedFont = fontDialog.currentFont();
+    bool ok;
+    selectedFont = fontDialog.getFont(&ok, selectedFont, this);
+    if (ok) {
+        QList<QWidget*> allWidgets = findChildren<QWidget*>();
+        for (QWidget* widget : allWidgets) {
+            QPushButton* button = qobject_cast<QPushButton*>(widget);
+            if (button) {
+                button->setFont(selectedFont);
+            }
+
+        }
+        ui->Display->setFont(selectedFont);
+        ui->HistoryText->setFont(selectedFont);
+    }
+}
+
+
+void Programmer::on_FontColor_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        QString styleSheet = QString("QPushButton {color: %1;} QLineEdit {color: %1;} QTextEdit{color:%1;}").arg(selectedColor.name());
+        setStyleSheet(styleSheet);
+    }
+}
+
+
+void Programmer::on_FontBackgroundColor_triggered()
+{
+    QColorDialog colorDialog(this);
+    QColor selectedColor = colorDialog.getColor(Qt::white, this);
+    if (selectedColor.isValid()) {
+        setStyleSheet(QString("QPushButton {background-color: %1;}").arg(selectedColor.name()));
+    }
+}
+

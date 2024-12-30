@@ -36,7 +36,21 @@
     <normaloff>:/img/calculator.png</normaloff>:/img/calculator.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true"> QMainWindow {
+ background-color: #F3F3F3;
+ color: black; }
+ QPushButton {
+ background-color: #FFFFFF; 
+color: black; 
+font-size:15px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+#btnEqual{
+background-color:#8E3AA7;
+}
+ QPushButton:hover { 
+background-color: #F3F3F3; }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -852,7 +866,18 @@
     <addaction name="Currency"/>
     <addaction name="Capacity"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="Theme"/>
+    <addaction name="Background"/>
+    <addaction name="Font"/>
+    <addaction name="FontColor"/>
+    <addaction name="FontBackgroundColor"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <action name="Standard">
    <property name="icon">
@@ -918,6 +943,81 @@
    </property>
    <property name="text">
     <string>日期计算</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Theme">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/Theme.svg</normaloff>:/img/Theme.svg</iconset>
+   </property>
+   <property name="text">
+    <string>主题</string>
+   </property>
+   <property name="toolTip">
+    <string>主题</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Background">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/background.svg</normaloff>:/img/background.svg</iconset>
+   </property>
+   <property name="text">
+    <string>主题背景</string>
+   </property>
+   <property name="toolTip">
+    <string>背景</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Font">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/font.svg</normaloff>:/img/font.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体</string>
+   </property>
+   <property name="toolTip">
+    <string>字体</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="FontColor">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/FontColor.svg</normaloff>:/img/FontColor.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>字体颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="FontBackgroundColor">
+   <property name="icon">
+    <iconset resource="rsc.qrc">
+     <normaloff>:/img/FontBackgroundColor.svg</normaloff>:/img/FontBackgroundColor.svg</iconset>
+   </property>
+   <property name="text">
+    <string>字体背景色</string>
+   </property>
+   <property name="toolTip">
+    <string>字体背景色</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

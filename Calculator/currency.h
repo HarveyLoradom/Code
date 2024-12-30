@@ -47,6 +47,16 @@ private slots:
     void on_startEdit_clicked();
     void on_endEdit_clicked();
 
+    void on_Theme_triggered();
+
+    void on_Background_triggered();
+
+    void on_Font_triggered();
+
+    void on_FontColor_triggered();
+
+    void on_FontBackgroundColor_triggered();
+
 private:
     Ui::Currency *ui;
 

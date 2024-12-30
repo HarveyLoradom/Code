@@ -44,6 +44,16 @@ private slots:
 
     void on_spinDay_textChanged();
 
+    void on_Theme_triggered();
+
+    void on_Background_triggered();
+
+    void on_Font_triggered();
+
+    void on_FontColor_triggered();
+
+    void on_FontBackgroundColor_triggered();
+
 private:
     Ui::Date *ui;
 };
