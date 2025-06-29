@@ -1,0 +1,9 @@
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\ScoreServiceApplication.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\config\RoleInterceptor.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\controller\ScoreController.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\config\JwtInterceptor.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\entity\Score.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\service\ScoreService.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\config\WebMvcConfig.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\mapper\ScoreMapper.java
+F:\Code\Java\Education-back\score-service\src\main\java\com\campus\score\service\impl\ScoreServiceImpl.java

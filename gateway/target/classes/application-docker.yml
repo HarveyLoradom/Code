@@ -1,0 +1,43 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: user-service
+          uri: http://user-service:9001
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=0
+        - id: course-service
+          uri: http://course-service:9002
+          predicates:
+            - Path=/api/course/**
+          filters:
+            - StripPrefix=0
+        - id: score-service
+          uri: http://score-service:9003
+          predicates:
+            - Path=/api/score/**
+          filters:
+            - StripPrefix=0
+        - id: search-service
+          uri: http://search-service:9004
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - StripPrefix=0
+
+logging:
+  level:
+    com.campus: debug 

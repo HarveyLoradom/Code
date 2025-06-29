@@ -1,0 +1,9 @@
+com\campus\score\entity\Score.class
+com\campus\score\service\impl\ScoreServiceImpl.class
+com\campus\score\controller\ScoreController.class
+com\campus\score\config\JwtInterceptor.class
+com\campus\score\ScoreServiceApplication.class
+com\campus\score\config\RoleInterceptor.class
+com\campus\score\service\ScoreService.class
+com\campus\score\config\WebMvcConfig.class
+com\campus\score\mapper\ScoreMapper.class

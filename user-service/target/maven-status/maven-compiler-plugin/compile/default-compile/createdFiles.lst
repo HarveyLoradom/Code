@@ -1,0 +1,9 @@
+com\campus\user\service\UserService.class
+com\campus\user\service\impl\UserServiceImpl.class
+com\campus\user\config\WebMvcConfig.class
+com\campus\user\UserServiceApplication.class
+com\campus\user\config\JwtInterceptor.class
+com\campus\user\entity\User.class
+com\campus\user\controller\UserController.class
+com\campus\user\config\SecurityConfig.class
+com\campus\user\mapper\UserMapper.class
