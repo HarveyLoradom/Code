@@ -1,6 +1,0 @@
-com\campus\search\SearchServiceApplication.class
-com\campus\search\controller\SearchController.class
-com\campus\search\repository\SearchRepository.class
-com\campus\search\service\impl\SearchServiceImpl.class
-com\campus\search\entity\SearchDocument.class
-com\campus\search\service\SearchService.class
